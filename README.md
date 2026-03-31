@@ -34,11 +34,15 @@ ML-python/
 │   ├── test_preprocessing.py          # 7 tests for data module
 │   ├── test_feature_engineering.py    # 8 tests for features module
 │   └── test_train.py                  # 8 tests for training module
+├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
+├── .gitignore                         # Git ignore rules (venv, caches, etc.)
 ├── LESSON_5_8_GUIDE.py                # Comprehensive lesson on module structuring (550+ lines)
 ├── LESSON_5_8_ASSIGNMENT.md           # Lesson 5.8 assignment guide (400+ lines)
-├── requirements.txt                   # Python dependencies
+├── LESSON_5_9_GUIDE.py                # Comprehensive lesson on virtual environments (600+ lines)
+├── LESSON_5_9_ASSIGNMENT.md           # Lesson 5.9 assignment guide (500+ lines)
+├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
 
@@ -284,6 +288,29 @@ Additional learning materials included:
   - Maps all lesson concepts to this project
   - Shows how the delivery delay pipeline implements each principle
   - Includes implementation recommendations and checklists
+
+### Lesson 5.9: Creating a Virtual Environment for an ML Project
+Foundation for reproducible, portable ML systems:
+
+- **`LESSON_5_9_GUIDE.py`** (600+ lines)
+  - 10 comprehensive sections on virtual environments
+  - Explains why venv is critical (dependency conflicts, reproducibility)
+  - Step-by-step setup with venv (the recommended tool)
+  - Tools comparison: venv vs virtualenv vs conda vs pipenv vs poetry
+  - Best practices and common mistakes to avoid
+  - Connection to production ML systems (Docker, Kubernetes, MLOps)
+
+- **`LESSON_5_9_ASSIGNMENT.md`** (500+ lines)
+  - Practical exercises for creating and managing venv
+  - Testing environment reproducibility through clean installation
+  - Checklist for verifying best practices
+  - Integration with git and .gitignore
+  - Links to production ML systems
+
+- **`.gitignore`** (Lesson 5.9 Implementation)
+  - Properly excludes venv/ directory from git
+  - Excludes Python caches, test artifacts, IDE files
+  - Example: Environment-specific files never committed to version control
 
 ---
 
