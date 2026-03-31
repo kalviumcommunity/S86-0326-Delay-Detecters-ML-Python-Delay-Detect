@@ -1,0 +1,42 @@
+2026-03-31 14:35:24,840 - INFO - ================================================================================
+2026-03-31 14:35:24,840 - INFO - ML PIPELINE EXECUTION START
+2026-03-31 14:35:24,840 - INFO - ================================================================================
+2026-03-31 14:35:24,841 - INFO - Step 1: Loading raw data...
+2026-03-31 14:35:24,876 - INFO - Loaded 200 samples with 8 features
+2026-03-31 14:35:24,876 - INFO - Columns: ['distance_km', 'items_count', 'order_value', 'day_of_week', 'day_of_month', 'zone', 'peak_hour', 'is_delayed']
+2026-03-31 14:35:24,877 - INFO - 
+Step 2: Cleaning data...
+2026-03-31 14:35:24,906 - INFO - Cleaned data: 200 samples
+2026-03-31 14:35:24,907 - INFO - 
+Step 3: Splitting data into train and test sets...
+2026-03-31 14:35:24,917 - INFO - Train: 160 samples | Test: 40 samples
+2026-03-31 14:35:24,917 - INFO - 
+Step 4: Engineering features...
+2026-03-31 14:35:24,955 - INFO - Prepared features: 19 features
+2026-03-31 14:35:24,956 - INFO - 
+Step 5: Training model...
+2026-03-31 14:35:25,142 - INFO - Model training complete
+2026-03-31 14:35:25,142 - INFO - 
+Step 6: Evaluating model on test set...
+2026-03-31 14:35:25,162 - INFO - Evaluation Metrics:
+2026-03-31 14:35:25,163 - INFO -   precision: 0.5455
+2026-03-31 14:35:25,163 - INFO -   recall: 0.5750
+2026-03-31 14:35:25,163 - INFO -   f1: 0.5425
+2026-03-31 14:35:25,164 - INFO -   roc_auc: 0.5573
+2026-03-31 14:35:25,164 - INFO -   accuracy: 0.5750
+2026-03-31 14:35:25,164 - INFO - 
+Step 7: Saving model and preprocessing artifacts...
+2026-03-31 14:35:25,228 - INFO - Artifacts saved successfully
+2026-03-31 14:35:25,228 - INFO - 
+Step 8: Demonstrating inference on new data...
+2026-03-31 14:35:25,241 - INFO - Generated predictions for 5 new samples
+2026-03-31 14:35:25,241 - INFO - Sample predictions: [1 1 0 0 1]
+2026-03-31 14:35:25,242 - INFO - Sample probabilities: [[0.38289087 0.61710913]
+ [0.38941721 0.61058279]
+ [0.74677497 0.25322503]
+ [0.74687735 0.25312265]
+ [0.47713203 0.52286797]]
+2026-03-31 14:35:25,242 - INFO - 
+================================================================================
+2026-03-31 14:35:25,243 - INFO - ML PIPELINE EXECUTION SUCCESS
+2026-03-31 14:35:25,243 - INFO - ================================================================================
