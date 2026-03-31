@@ -1,5 +1,43 @@
 # ML Pipeline: Modularized, Production-Ready Architecture
 
+A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
+
+**Three Complete Lessons:**
+- **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
+- **Lesson 5.8**: Structuring Modules for Model Code (23 unit tests, all passing)
+- **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
+
+---
+
+## Quick Start (5 Minutes)
+
+```bash
+# 1. Clone and navigate
+git clone <repo>
+cd ML-python
+
+# 2. Create virtual environment
+python -m venv venv
+
+# 3. Activate (Linux/macOS)
+source venv/bin/activate
+# OR (Windows)
+venv\Scripts\activate
+
+# 4. Install dependencies
+pip install -r requirements.txt
+
+# 5. Run pipeline
+python main.py
+
+# 6. Run tests
+python -m pytest tests/ -v
+```
+
+For detailed setup instructions, see "Setup and Installation" section below.
+
+---
+
 ## 5.7 Assignment: Refactoring Python Functions and Imports for ML Workflows
 
 This project demonstrates **professional ML engineering principles** through a modular, reusable pipeline architecture. It transforms fragmented notebook code into a structured system that is reproducible, testable, and deployable.
@@ -45,6 +83,129 @@ ML-python/
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
+
+---
+
+## Setup and Installation (Lesson 5.9)
+
+### Prerequisites
+
+- Python 3.9 or higher
+- pip (included with Python)
+- git (for version control)
+
+### 1. Create Virtual Environment
+
+Inside the project directory, create an isolated Python environment:
+
+```bash
+cd ML-python
+python -m venv venv
+```
+
+This creates a `venv/` directory containing an isolated Python installation. The environment is never committed to git (see `.gitignore`).
+
+### 2. Activate Virtual Environment
+
+Activate the isolated environment:
+
+**On Linux/macOS:**
+```bash
+source venv/bin/activate
+```
+
+**On Windows (cmd.exe):**
+```bash
+venv\Scripts\activate
+```
+
+**On Windows (PowerShell):**
+```bash
+venv\Scripts\Activate.ps1
+```
+
+Your terminal prompt should change to show `(venv)` prefix, indicating you're inside the virtual environment.
+
+### 3. Install Dependencies
+
+Install all required packages with exact versions (ensuring reproducibility):
+
+```bash
+(venv) pip install -r requirements.txt
+```
+
+This installs:
+- `pandas` - Data manipulation
+- `numpy` - Numerical computing
+- `scikit-learn` - ML algorithms
+- `matplotlib`, `seaborn` - Visualization
+- `joblib` - Model serialization
+
+### 4. Verify Installation
+
+Confirm everything is set up correctly:
+
+```bash
+(venv) python -m pytest tests/ -v
+```
+
+All 23 tests should pass:
+
+```
+======================== 23 passed in 6.79s =========================
+```
+
+### 5. Run the Complete Pipeline
+
+Execute the end-to-end ML pipeline:
+
+```bash
+(venv) python main.py
+```
+
+This will:
+1. Load and clean data from `data/raw/delivery_data.csv`
+2. Engineer features from raw data
+3. Train a Random Forest model
+4. Evaluate on test set
+5. Save model and metrics
+
+Output files are created in:
+- `models/` - Trained model and preprocessing pipeline
+- `reports/metrics.json` - Evaluation metrics
+- `logs/pipeline.log` - Execution log
+
+### 6. Deactivate Environment (When Done)
+
+Exit the virtual environment:
+
+```bash
+(venv) deactivate
+```
+
+Press [back to] system Python:
+
+```bash
+$ python --version  # System Python
+```
+
+---
+
+## Why Virtual Environments Matter
+
+**Without venv:**
+- Different projects fight over package versions
+- Upgrading a library breaks old projects silently
+- Teammates cannot reproduce your setup
+- Deployment fails due to version mismatches
+
+**With venv:**
+- Each project has its own isolated Python
+- Exact versions pinned in `requirements.txt`
+- Teammates can recreate your environment exactly
+- Reproducibility guaranteed
+
+See `LESSON_5_9_GUIDE.py` for detailed explanations of virtual environments and their critical role in ML engineering.
 
 ---
 
