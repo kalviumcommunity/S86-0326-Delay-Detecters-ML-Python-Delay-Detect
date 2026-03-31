@@ -1,53 +1,364 @@
-# 5.3 Learning Milestone: Reading and Interpreting a Sample ML Repository
+# ML Pipeline: Modularized, Production-Ready Architecture
 
-## Problem Statement
-A food delivery platform wants to improve service reliability but lacks clarity on delivery time variations. The objective is to analyze order and delivery timestamps to identify delays, high-risk zones, and time windows where delivery performance degrades.
+## 5.7 Assignment: Refactoring Python Functions and Imports for ML Workflows
 
-## What I Reviewed
-For this milestone, I interpreted a sample ML project repository designed around the delivery-delay problem above. The focus here is not training a new model, but understanding how the repository is organized, how data flows through the pipeline, and whether the project is trustworthy and maintainable.
+This project demonstrates **professional ML engineering principles** through a modular, reusable pipeline architecture. It transforms fragmented notebook code into a structured system that is reproducible, testable, and deployable.
 
 ---
 
-## Repository Structure Interpretation
+## Project Structure
 
-A clean project layout for this use case is:
+```
+ML-python/
+├── data/
+│   ├── raw/                           # Immutable source data
+│   │   └── delivery_data.csv
+│   └── processed/                     # Cleaned, transformed data
+├── models/                            # Saved model artifacts
+│   ├── delay_risk_model.pkl           # Fitted model
+│   └── preprocessing_pipeline.pkl     # Fitted transformations
+├── reports/                           # Evaluation reports and metrics
+│   └── evaluation_summary.md
+├── logs/                              # Pipeline execution logs
+├── src/                               # Core pipeline modules
+│   ├── __init__.py
+│   ├── config.py                      # Centralized configuration
+│   ├── data_preprocessing.py          # Load, clean, split data
+│   ├── feature_engineering.py         # Encode, scale, transform features
+│   ├── train.py                       # Model training
+│   ├── evaluate.py                    # Model evaluation
+│   ├── predict.py                     # Inference on new data
+│   └── persistence.py                 # Save/load artifacts
+├── main.py                            # Orchestration script
+├── create_sample_data.py              # Generate test data
+├── requirements.txt                   # Python dependencies
+└── README.md
+```
 
-project-root/
-|-- data/
-|   |-- raw/
-|   |   |-- orders.csv
-|   |   \-- deliveries.csv
-|   \-- processed/
-|       \-- delivery_features.parquet
-|-- notebooks/
-|   \-- 01_delay_exploration.ipynb
-|-- src/
-|   |-- data_preprocessing.py
-|   |-- feature_engineering.py
-|   |-- train.py
-|   |-- evaluate.py
-|   \-- predict.py
-|-- models/
-|   \-- delay_risk_model.pkl
-|-- reports/
-|   \-- evaluation_summary.md
-|-- requirements.txt
-|-- README.md
-\-- main.py
+---
 
-### What Each Part Is Responsible For
-- data/raw: immutable source exports of order and delivery records.
-- data/processed: cleaned and transformed datasets used by model scripts.
-- notebooks: exploratory analysis and visual inspection of delay patterns.
-- src/data_preprocessing.py: timestamp parsing, missing value handling, and record-level cleaning.
-- src/feature_engineering.py: delay-related feature creation such as peak-hour flags and zone-level rolling delay statistics.
-- src/train.py: model selection and fitting for delay risk or delay duration prediction.
-- src/evaluate.py: held-out evaluation and metrics reporting.
-- src/predict.py: inference logic used after training.
-- models: saved model artifacts for reuse and deployment.
-- reports: metric summaries and interpretation output.
-- requirements.txt: dependency pinning for reproducibility.
-- main.py: orchestrates end-to-end execution.
+## Core Design Principles
+
+### 1. Single Responsibility Principle
+Each function performs **exactly one conceptual task**:
+- **`data_preprocessing.py`**: Loading, cleaning, and splitting data
+- **`feature_engineering.py`**: Encoding, scaling, and feature transformation
+- **`train.py`**: Model instantiation and training
+- **`evaluate.py`**: Evaluation metrics computation
+- **`predict.py`**: Inference on new data
+- **`persistence.py`**: Saving and loading artifacts
+
+### 2. Clear Input/Output Contracts
+All functions use:
+- **Type hints** for parameters and return types
+- **Comprehensive docstrings** explaining purpose, parameters, and return values
+- **Explicit parameters** instead of relying on global state
+- **Structured returns** (dictionaries, tuples) instead of printing
+
+### 3. Configuration Centralization (`config.py`)
+All configuration lives in one place:
+- File paths (data, models, reports)
+- Random states for reproducibility
+- Hyperparameters
+- Feature column names
+
+This makes it trivial to modify parameters without touching function implementations.
+
+### 4. Data Leakage Prevention
+The pipeline enforces proper train/test isolation:
+- **Training** uses `fit_transform()` to learn transformations from training data
+- **Inference** uses `transform()` to apply fitted transformations without refitting
+- This is enforced by function signatures and separation of concerns
+
+---
+
+## Module Descriptions
+
+### `config.py`
+Centralized configuration for the entire pipeline. Every path, parameter, and column specification is defined here.
+
+**Key Features:**
+- `Config` class with static methods for directory creation
+- `ensure_directories()` creates output folders on demand
+- All hyperparameters and evaluation metrics centralized
+
+### `data_preprocessing.py`
+Data loading, cleaning, and train/test splitting.
+
+**Functions:**
+- `load_data()` - Read CSV files
+- `handle_missing_values()` - Fill NaNs with configurable strategy
+- `remove_duplicates()` - Remove duplicate rows
+- `split_data()` - Stratified train/test split with validation
+- `clean_data()` - Orchestrator combining multiple cleaning steps
+
+### `feature_engineering.py`
+Feature encoding, scaling, and pipeline construction.
+
+**Functions:**
+- `encode_categorical_features()` - One-hot encode categorical variables
+- `scale_numerical_features()` - Standardize numerical features
+- `create_derived_features()` - Engineer new features from existing ones
+- `build_preprocessing_pipeline()` - Construct sklearn ColumnTransformer
+- `apply_preprocessing_pipeline()` - Apply fitted pipeline with explicit fit/transform control
+- `prepare_features()` - Orchestrator combining all feature engineering steps
+
+**CRITICAL:** Separates `fit=True` (training) from `fit=False` (inference) to prevent data leakage.
+
+### `train.py`
+Model instantiation and training.
+
+**Functions:**
+- `train_model()` - Fit model on training data, return artifact
+- `train_with_validation()` - Train and track validation performance
+
+**Key Features:**
+- Receives prepared feature data (no preprocessing inside function)
+- Returns fitted model object (not saved by training function)
+- Supports multiple model types via configuration
+
+### `evaluate.py`
+Model evaluation and metrics computation.
+
+**Functions:**
+- `evaluate_model()` - Compute multiple metrics, return dictionary
+- `compute_confusion_matrix()` - Generate confusion matrix
+- `get_classification_report()` - Detailed per-class metrics
+- `compare_metrics()` - Compare current vs baseline performance
+
+**Key Features:**
+- Returns metrics as structured data, doesn't print
+- Supports multiple metric types through configuration
+- Enables programmatic metric aggregation and logging
+
+### `predict.py`
+Inference on new data using saved artifacts.
+
+**Functions:**
+- `load_artifacts()` - Load saved model and pipeline
+- `preprocess_new_data()` - Apply fitted transformations (transform only, never fit)
+- `predict()` - Generate predictions on new data
+- `predict_with_confidence()` - Return predictions with confidence scores
+- `batch_predict()` - Process multiple batches of data
+
+**CRITICAL:** Only calls `transform()` on preprocessing pipeline, never `fit_transform()`, preventing data leakage during inference.
+
+### `persistence.py`
+Saving and loading model artifacts.
+
+**Functions:**
+- `save_model()` - Serialize fitted model to pickle
+- `save_pipeline()` - Serialize preprocessing pipeline
+- `save_artifacts()` - Save both model and pipeline together
+- `save_metrics()` - Save metrics to JSON
+- `load_metrics()` - Load metrics from JSON
+
+---
+
+## How to Use
+
+### 1. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Create Sample Data
+```bash
+python create_sample_data.py
+```
+
+This generates synthetic delivery data for testing. Replace with your own data in `data/raw/delivery_data.csv`.
+
+### 3. Run Complete Pipeline
+```bash
+python main.py
+```
+
+This executes:
+1. Load and clean data
+2. Split into train/test sets
+3. Engineer features
+4. Train model
+5. Evaluate on test set
+6. Save artifacts
+7. Demonstrate inference
+
+Execution logs are saved to `logs/pipeline.log`.
+
+### 4. Use Model for New Predictions
+```python
+from src.predict import load_artifacts, predict
+import pandas as pd
+
+# Load saved model and pipeline
+model, pipeline = load_artifacts()
+
+# Load new data
+new_data = pd.read_csv("path/to/new_data.csv")
+
+# Generate predictions
+predictions = predict(new_data, model, pipeline)
+```
+
+---
+
+## Key Engineering Principles Demonstrated
+
+### ✅ Reproducibility
+- **Random state** controlled in all operations
+- **Configuration** centralized and version-controlled
+- **Artifacts** saved for exact reproduction without retraining
+
+### ✅ Modularity
+- Each function has **single responsibility**
+- Functions **independently testable**
+- **No hidden dependencies** through global state
+- **Clean imports** of only required functions
+
+### ✅ Separation of Concerns
+- **Data pipeline** (load → clean → split) separate from **ML pipeline** (train → evaluate)
+- **Training** separate from **inference**
+- **Preprocessing** strictly isolated from **model logic**
+
+### ✅ Production Readiness
+- **Artifact persistence** enables deployment without retraining
+- **Proper error handling** and validation
+- **Logging** tracks execution and issues
+- **Configuration** externalizable for different environments
+
+### ✅ Data Integrity
+- **Train/test isolation** enforced by function signatures
+- **Data leakage prevention** through fit/transform separation
+- **Validation** of required columns and data shapes
+- **Documented assumptions** in docstrings
+
+---
+
+## Common Patterns
+
+### Pattern 1: Training with Config
+```python
+from src.config import Config
+from src.train import train_model
+
+model = train_model(
+    X_train, y_train,
+    random_state=Config.RANDOM_STATE
+)
+```
+
+### Pattern 2: Feature Processing (Training)
+```python
+from src.feature_engineering import prepare_features
+
+X_train_prepared, pipeline = prepare_features(
+    X_train,
+    fit_pipeline=True  # Fit transformations on training data
+)
+```
+
+### Pattern 3: Feature Processing (Inference)
+```python
+X_test_prepared, _ = prepare_features(
+    X_test,
+    fit_pipeline=False,  # Do NOT fit, only apply
+    preprocessing_pipeline=pipeline  # Use training pipeline
+)
+```
+
+### Pattern 4: Evaluation and Metrics
+```python
+from src.evaluate import evaluate_model
+
+metrics = evaluate_model(model, X_test, y_test)
+
+# Metrics are a dictionary, not printed output
+print(f"F1 Score: {metrics['f1']:.4f}")
+```
+
+### Pattern 5: Inference on New Data
+```python
+from src.predict import load_artifacts, predict
+
+model, pipeline = load_artifacts()
+predictions = predict(new_data, model, pipeline)
+# Process predictions programmatically
+results_df = new_data.copy()
+results_df['prediction'] = predictions
+```
+
+---
+
+## Why This Structure Matters
+
+### Without Modularization
+```
+(Fragile notebook code)
+↓
+Can only run in sequence
+Cannot debug individual components
+Cannot reuse preprocessing at inference time
+Cannot be version controlled effectively
+Cannot collaborate
+Cannot deploy
+```
+
+### With Modularization
+```
+(Clean, separate modules)
+↓
+Each component independently testable
+Preprocessing reused identically at training and inference
+Clear responsibility boundaries
+Version controlled and collaborative
+Production-ready and deployable
+```
+
+---
+
+## Testing Individual Modules
+
+Each module can be tested independently:
+
+```python
+# Test preprocessing
+from src.data_preprocessing import handle_missing_values
+import pandas as pd
+
+df = pd.DataFrame({"a": [1, 2, None], "b": [None, "x", "y"]})
+df_clean = handle_missing_values(df)
+assert df_clean.isnull().sum().sum() == 0
+
+# Test evaluation
+from src.evaluate import evaluate_model
+metrics = evaluate_model(model, X_test, y_test)
+assert metrics['f1'] > 0
+assert 0 <= metrics['precision'] <= 1
+```
+
+---
+
+## Extending the Pipeline
+
+To add new components:
+
+1. **New data source?** → Add function to `data_preprocessing.py`
+2. **New feature?** → Add function to `feature_engineering.py`
+3. **New model type?** → Add training logic to `train.py`
+4. **New metric?** → Add to `evaluate.py` and update `config.py`
+5. **Custom orchestration?** → Create new orchestration script, import from `src/`
+
+All existing code remains unchanged and tested.
+
+---
+
+## References
+
+- **Single Responsibility Principle**: Each function does one thing, does it well, changes for one reason
+- **Separation of Concerns**: Training, evaluation, and inference logic cleanly separated
+- **Configuration Management**: All parameters externalized for easy modification
+- **Data Leakage Prevention**: Strict `fit()` vs `transform()` boundaries
+- **Reproducibility**: Random states, centralized configuration, artifact persistence
 
 This separation of concerns is good engineering practice because each stage can be tested and maintained independently.
 
