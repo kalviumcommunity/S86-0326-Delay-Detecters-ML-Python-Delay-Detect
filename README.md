@@ -20,7 +20,7 @@ ML-python/
 ├── reports/                           # Evaluation reports and metrics
 │   └── evaluation_summary.md
 ├── logs/                              # Pipeline execution logs
-├── src/                               # Core pipeline modules
+├── src/                               # Core pipeline modules (Lesson 5.7)
 │   ├── __init__.py
 │   ├── config.py                      # Centralized configuration
 │   ├── data_preprocessing.py          # Load, clean, split data
@@ -29,8 +29,15 @@ ML-python/
 │   ├── evaluate.py                    # Model evaluation
 │   ├── predict.py                     # Inference on new data
 │   └── persistence.py                 # Save/load artifacts
+├── tests/                             # Unit tests (Lesson 5.8)
+│   ├── __init__.py
+│   ├── test_preprocessing.py          # 7 tests for data module
+│   ├── test_feature_engineering.py    # 8 tests for features module
+│   └── test_train.py                  # 8 tests for training module
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
+├── LESSON_5_8_GUIDE.py                # Comprehensive lesson on module structuring (550+ lines)
+├── LESSON_5_8_ASSIGNMENT.md           # Lesson 5.8 assignment guide (400+ lines)
 ├── requirements.txt                   # Python dependencies
 └── README.md
 ```
@@ -199,6 +206,84 @@ new_data = pd.read_csv("path/to/new_data.csv")
 # Generate predictions
 predictions = predict(new_data, model, pipeline)
 ```
+
+---
+
+## Testing and Quality Assurance (Lesson 5.8)
+
+This project includes a comprehensive test suite demonstrating the **testability benefits of modular structure**.
+
+### Running Unit Tests
+
+```bash
+# Run all tests with verbose output
+python -m pytest tests/ -v
+
+# Run tests for specific module
+python -m pytest tests/test_preprocessing.py -v
+python -m pytest tests/test_feature_engineering.py -v
+python -m pytest tests/test_train.py -v
+
+# Run tests with coverage
+python -m pytest tests/ --cov=src --cov-report=html
+```
+
+### Test Suite Overview
+
+- **23 total tests** - All passing ✅
+- **test_preprocessing.py** (7 tests) - Data loading, cleaning, splitting
+- **test_feature_engineering.py** (8 tests) - Encoding, scaling, pipeline construction
+- **test_train.py** (8 tests) - Model training and validation
+
+### Why Modular Structure Enables Testing
+
+```python
+# Can test preprocessing ALONE without running entire pipeline
+from src.data_preprocessing import handle_missing_values
+df_clean = handle_missing_values(df_with_nulls)
+assert df_clean.isnull().sum().sum() == 0
+
+# Can test feature engineering ALONE
+from src.feature_engineering import encode_categorical_features
+X_encoded = encode_categorical_features(X)
+assert X_encoded.shape[0] == X.shape[0]
+
+# Can test training ALONE with synthetic data
+from src.train import train_model
+model = train_model(X_train_synthetic, y_train_synthetic)
+assert model is not None
+```
+
+### Key Testing Patterns
+
+1. **Isolated Function Testing** - Each function tested independently
+2. **Integration Testing** - Functions tested together in realistic workflows
+3. **Data Validation** - Tests verify shapes, types, and value ranges
+4. **Reproducibility** - Tests use fixed random states
+
+---
+
+## Lesson Materials
+
+### Lesson 5.7: Reviewing Python Functions and Imports for ML Workflows
+This project itself is the assignment—demonstrating:
+- Clean function design with type hints and docstrings
+- Proper import management avoiding circular dependencies
+- Reusable functions at both training and inference time
+- Production-ready ML pipeline architecture
+
+### Lesson 5.8: Structuring Python Files and Modules for Model Code
+Additional learning materials included:
+
+- **`LESSON_5_8_GUIDE.py`** (550+ lines)
+  - 9 comprehensive sections on module structuring
+  - 40+ code examples showing best practices and anti-patterns
+  - Covers: directory structure, module responsibilities, import management, data leakage prevention, testing patterns
+  
+- **`LESSON_5_8_ASSIGNMENT.md`** (400+ lines)
+  - Maps all lesson concepts to this project
+  - Shows how the delivery delay pipeline implements each principle
+  - Includes implementation recommendations and checklists
 
 ---
 
