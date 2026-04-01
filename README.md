@@ -2,10 +2,11 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Three Complete Lessons:**
+**Four Complete Lessons:**
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (23 unit tests, all passing)
 - **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
+- **Lesson 5.10**: Dependency Management with requirements.txt (strict pinning & reproducibility)
 
 ---
 
@@ -80,6 +81,8 @@ ML-python/
 ├── LESSON_5_8_ASSIGNMENT.md           # Lesson 5.8 assignment guide (400+ lines)
 ├── LESSON_5_9_GUIDE.py                # Comprehensive lesson on virtual environments (600+ lines)
 ├── LESSON_5_9_ASSIGNMENT.md           # Lesson 5.9 assignment guide (500+ lines)
+├── LESSON_5_10_GUIDE.py               # Dependency management and version pinning guide
+├── LESSON_5_10_ASSIGNMENT.md          # Hands-on assignment for requirements.txt workflow
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
@@ -206,6 +209,37 @@ $ python --version  # System Python
 - Reproducibility guaranteed
 
 See `LESSON_5_9_GUIDE.py` for detailed explanations of virtual environments and their critical role in ML engineering.
+
+---
+
+## Dependency Management (Lesson 5.10)
+
+This project uses strict dependency pinning in `requirements.txt` for reproducibility.
+
+Current pinned direct dependencies:
+
+```txt
+pandas==2.1.0
+numpy==1.24.3
+scikit-learn==1.3.0
+joblib==1.3.1
+matplotlib==3.7.2
+seaborn==0.12.2
+```
+
+Install dependencies into your active virtual environment:
+
+```bash
+pip install -r requirements.txt
+```
+
+Why strict pinning (`==`) is used in this sprint:
+- Guarantees consistent behavior across machines
+- Reduces metric drift caused by library updates
+- Prevents model artifact compatibility surprises
+- Makes debugging and collaboration reliable
+
+If dependencies are changed, update `requirements.txt` in the same commit and validate with a clean environment rebuild.
 
 ---
 
@@ -472,6 +506,21 @@ Foundation for reproducible, portable ML systems:
   - Properly excludes venv/ directory from git
   - Excludes Python caches, test artifacts, IDE files
   - Example: Environment-specific files never committed to version control
+
+### Lesson 5.10: Managing Dependencies Using requirements.txt
+Dependency control and reproducibility discipline:
+
+- **`LESSON_5_10_GUIDE.py`**
+  - Why dependency management is foundational in ML
+  - Version specifiers (`==`, `>=`, `~=`) and when to use them
+  - Manual vs freeze-based requirements workflows
+  - Reproducibility checklist and failure recovery patterns
+
+- **`LESSON_5_10_ASSIGNMENT.md`**
+  - Step-by-step dependency workflow tasks
+  - Clean environment rebuild validation
+  - README and setup validation checklist
+  - Reflection prompts for ML reproducibility thinking
 
 ---
 
