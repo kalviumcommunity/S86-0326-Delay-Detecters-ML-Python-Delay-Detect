@@ -2,12 +2,13 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Five Complete Lessons:**
+**Six Complete Lessons:**
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (23 unit tests, all passing)
 - **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
 - **Lesson 5.10**: Dependency Management with requirements.txt (strict pinning & reproducibility)
 - **Lesson 5.11**: Professional ML Folder Structure (separation of concerns and artifact flow)
+- **Lesson 5.12**: Separating Data Loading, Training, and Inference (architectural discipline)
 
 ---
 
@@ -89,6 +90,8 @@ ML-python/
 ├── LESSON_5_10_ASSIGNMENT.md          # Hands-on assignment for requirements.txt workflow
 ├── LESSON_5_11_GUIDE.py               # Professional ML folder structure design guide
 ├── LESSON_5_11_ASSIGNMENT.md          # Hands-on structure assignment and checklist
+├── LESSON_5_12_GUIDE.py               # Data loading, training, inference separation guide
+├── LESSON_5_12_ASSIGNMENT.md          # Layer validation and architectural review assignment
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
@@ -567,6 +570,25 @@ Architecture and repository design discipline:
   - Folder responsibility enforcement checklist
   - Reproducibility and collaboration readiness checks
   - Reflection prompts on structure quality
+
+### Lesson 5.12: Separating Data Loading, Training, and Inference
+Architectural separation and layer design:
+
+- **`LESSON_5_12_GUIDE.py`**
+  - Why separation matters (training vs inference modes)
+  - Conceptual architecture with clear layer boundaries
+  - Data loading layer: what it does and doesn't do
+  - Training layer: fitting artifacts only on training data
+  - Inference layer: transforming with saved artifacts only
+  - Common architectural mistakes and how to prevent them
+  - Applied examples using this project's code
+
+- **`LESSON_5_12_ASSIGNMENT.md`**
+  - Identify and validate each layer in your project
+  - Trace training and inference data flow
+  - Verify no cross-contamination between layers
+  - Test layer isolation and independence
+  - Document architectural decisions and benefits
 
 ---
 
