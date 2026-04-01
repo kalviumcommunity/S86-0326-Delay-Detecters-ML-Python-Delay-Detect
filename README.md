@@ -2,11 +2,12 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Four Complete Lessons:**
+**Five Complete Lessons:**
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (23 unit tests, all passing)
 - **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
 - **Lesson 5.10**: Dependency Management with requirements.txt (strict pinning & reproducibility)
+- **Lesson 5.11**: Professional ML Folder Structure (separation of concerns and artifact flow)
 
 ---
 
@@ -52,7 +53,10 @@ ML-python/
 ├── data/
 │   ├── raw/                           # Immutable source data
 │   │   └── delivery_data.csv
-│   └── processed/                     # Cleaned, transformed data
+│   ├── processed/                     # Cleaned, transformed data
+│   └── external/                      # Third-party or reference datasets
+├── notebooks/                         # EDA and experimentation only
+│   └── README.md
 ├── models/                            # Saved model artifacts
 │   ├── delay_risk_model.pkl           # Fitted model
 │   └── preprocessing_pipeline.pkl     # Fitted transformations
@@ -83,6 +87,8 @@ ML-python/
 ├── LESSON_5_9_ASSIGNMENT.md           # Lesson 5.9 assignment guide (500+ lines)
 ├── LESSON_5_10_GUIDE.py               # Dependency management and version pinning guide
 ├── LESSON_5_10_ASSIGNMENT.md          # Hands-on assignment for requirements.txt workflow
+├── LESSON_5_11_GUIDE.py               # Professional ML folder structure design guide
+├── LESSON_5_11_ASSIGNMENT.md          # Hands-on structure assignment and checklist
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
@@ -240,6 +246,31 @@ Why strict pinning (`==`) is used in this sprint:
 - Makes debugging and collaboration reliable
 
 If dependencies are changed, update `requirements.txt` in the same commit and validate with a clean environment rebuild.
+
+---
+
+## ML Folder Structure (Lesson 5.11)
+
+This repository now follows a professional ML structure with strict separation of concerns:
+
+- data/raw: immutable source-of-truth datasets
+- data/processed: generated cleaned/feature-ready datasets
+- data/external: third-party/reference data assets
+- notebooks: exploration and visualization only
+- src: reusable production pipeline logic
+- models: saved model and preprocessing artifacts
+- reports: evaluation outputs and summaries
+- logs: execution tracking and experiment logs
+
+Why this matters:
+- Prevents accidental data corruption
+- Makes training and prediction flow explicit
+- Improves collaboration and onboarding
+- Supports reproducible and scalable ML pipelines
+
+Lesson resources:
+- `LESSON_5_11_GUIDE.py`
+- `LESSON_5_11_ASSIGNMENT.md`
 
 ---
 
@@ -521,6 +552,21 @@ Dependency control and reproducibility discipline:
   - Clean environment rebuild validation
   - README and setup validation checklist
   - Reflection prompts for ML reproducibility thinking
+
+### Lesson 5.11: Creating an ML Project Folder Structure
+Architecture and repository design discipline:
+
+- **`LESSON_5_11_GUIDE.py`**
+  - Standard ML project layout and why it matters
+  - Folder-by-folder responsibilities and boundaries
+  - Training vs prediction flow separation
+  - Structural anti-patterns and how to avoid them
+
+- **`LESSON_5_11_ASSIGNMENT.md`**
+  - Step-by-step structure validation tasks
+  - Folder responsibility enforcement checklist
+  - Reproducibility and collaboration readiness checks
+  - Reflection prompts on structure quality
 
 ---
 
