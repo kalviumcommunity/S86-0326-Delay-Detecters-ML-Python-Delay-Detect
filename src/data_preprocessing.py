@@ -15,6 +15,47 @@ from typing import Tuple
 from src.config import Config
 
 
+def validate_feature_definition(df: pd.DataFrame, target_column: str, feature_cols: list[str], excluded_cols: list[str]) -> None:
+    """
+    Validate that feature and target definitions are consistent with the DataFrame.
+
+    Raises ValueError on errors and prints warnings for suspicious columns.
+    """
+    # Existence checks
+    missing_features = set(feature_cols) - set(df.columns)
+    if missing_features:
+        raise ValueError(f"Features not found in data: {missing_features}")
+
+    if target_column not in df.columns:
+        raise ValueError(f"Target '{target_column}' not found in DataFrame")
+
+    # Target must not be listed as a feature
+    if target_column in feature_cols:
+        raise ValueError("Target leaked into features!")
+
+    # Excluded columns should not overlap features
+    if set(excluded_cols) & set(feature_cols):
+        raise ValueError("Some excluded columns appear in feature list")
+
+    # Simple ID-like column check
+    id_patterns = ["id", "ID", "Id", "key", "KEY", "Key"]
+    for col in feature_cols:
+        if any(pat in col for pat in id_patterns) and col not in excluded_cols:
+            print(f"⚠️  Warning: '{col}' looks like an identifier column")
+
+    # Check for very high correlation with target (possible leakage)
+    for col in feature_cols:
+        if col in df.select_dtypes(include=[np.number]).columns:
+            try:
+                corr = df[col].corr(df[target_column].astype(float))
+                if pd.notna(corr) and abs(corr) > 0.95:
+                    print(f"⚠️  Warning: '{col}' has correlation {corr:.3f} with target (possible leakage)")
+            except Exception:
+                continue
+
+    print("✓ Feature definition validation passed")
+
+
 def load_data(filepath: str | Path) -> pd.DataFrame:
     """
     Load raw data from CSV file.
