@@ -2,13 +2,14 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Six Complete Lessons:**
+**Seven Complete Lessons:**
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (23 unit tests, all passing)
 - **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
 - **Lesson 5.10**: Dependency Management with requirements.txt (strict pinning & reproducibility)
 - **Lesson 5.11**: Professional ML Folder Structure (separation of concerns and artifact flow)
 - **Lesson 5.12**: Separating Data Loading, Training, and Inference (architectural discipline)
+- **Lesson 5.13**: Understanding Supervised Learning Problem Types (classification vs regression, metrics, pitfalls)
 
 ---
 
@@ -92,6 +93,8 @@ ML-python/
 ├── LESSON_5_11_ASSIGNMENT.md          # Hands-on structure assignment and checklist
 ├── LESSON_5_12_GUIDE.py               # Data loading, training, inference separation guide
 ├── LESSON_5_12_ASSIGNMENT.md          # Layer validation and architectural review assignment
+├── LESSON_5_13_GUIDE.py               # Problem type identification guide (400+ lines)
+├── LESSON_5_13_ASSIGNMENT.md          # Supervised learning problem analysis and classification
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
@@ -589,6 +592,30 @@ Architectural separation and layer design:
   - Verify no cross-contamination between layers
   - Test layer isolation and independence
   - Document architectural decisions and benefits
+
+### Lesson 5.13: Understanding Supervised Learning Problem Types
+Foundational framework for problem identification and model selection:
+
+- **`LESSON_5_13_GUIDE.py`** (400+ lines)
+  - What is supervised learning and how it differs from other ML paradigms
+  - Classification vs Regression: the fundamental distinction
+  - Classification subtypes: binary, multi-class, multi-label
+  - Regression subtypes: linear, non-linear, count regression
+  - How to identify problem type from business requirements and data
+  - Choosing appropriate algorithms by problem type
+  - Evaluation metrics: why different metrics for different problems
+  - Common pitfalls: binning regression, treating class labels as numbers, ignoring imbalance
+  - Real-world examples: spam detection, house price prediction, churn prediction, digit recognition
+  - Mental models and decision frameworks for any supervised learning task
+
+- **`LESSON_5_13_ASSIGNMENT.md`** (500+ lines)
+  - Part A: Identify problem types from 4 business scenario descriptions
+  - Part B: Analyze the delivery delay prediction project and its problem type
+  - Part C: Explore metrics from your project and interpret them in context
+  - Part D: Recognize and correct common pitfalls in problem type identification
+  - Part E: Match algorithms to problem types with reasoned justification
+  - Part F: Real-world scenarios requiring problem type analysis
+  - Part G: Reflection questions to solidify understanding
 
 ---
 
