@@ -3,6 +3,7 @@
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
 **Seven Complete Lessons:**
+
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (23 unit tests, all passing)
 - **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
@@ -125,16 +126,19 @@ This creates a `venv/` directory containing an isolated Python installation. The
 Activate the isolated environment:
 
 **On Linux/macOS:**
+
 ```bash
 source venv/bin/activate
 ```
 
 **On Windows (cmd.exe):**
+
 ```bash
 venv\Scripts\activate
 ```
 
 **On Windows (PowerShell):**
+
 ```bash
 venv\Scripts\Activate.ps1
 ```
@@ -150,6 +154,7 @@ Install all required packages with exact versions (ensuring reproducibility):
 ```
 
 This installs:
+
 - `pandas` - Data manipulation
 - `numpy` - Numerical computing
 - `scikit-learn` - ML algorithms
@@ -179,6 +184,7 @@ Execute the end-to-end ML pipeline:
 ```
 
 This will:
+
 1. Load and clean data from `data/raw/delivery_data.csv`
 2. Engineer features from raw data
 3. Train a Random Forest model
@@ -186,6 +192,7 @@ This will:
 5. Save model and metrics
 
 Output files are created in:
+
 - `models/` - Trained model and preprocessing pipeline
 - `reports/metrics.json` - Evaluation metrics
 - `logs/pipeline.log` - Execution log
@@ -209,12 +216,14 @@ $ python --version  # System Python
 ## Why Virtual Environments Matter
 
 **Without venv:**
+
 - Different projects fight over package versions
 - Upgrading a library breaks old projects silently
 - Teammates cannot reproduce your setup
 - Deployment fails due to version mismatches
 
 **With venv:**
+
 - Each project has its own isolated Python
 - Exact versions pinned in `requirements.txt`
 - Teammates can recreate your environment exactly
@@ -246,6 +255,7 @@ pip install -r requirements.txt
 ```
 
 Why strict pinning (`==`) is used in this sprint:
+
 - Guarantees consistent behavior across machines
 - Reduces metric drift caused by library updates
 - Prevents model artifact compatibility surprises
@@ -269,12 +279,14 @@ This repository now follows a professional ML structure with strict separation o
 - logs: execution tracking and experiment logs
 
 Why this matters:
+
 - Prevents accidental data corruption
 - Makes training and prediction flow explicit
 - Improves collaboration and onboarding
 - Supports reproducible and scalable ML pipelines
 
 Lesson resources:
+
 - `LESSON_5_11_GUIDE.py`
 - `LESSON_5_11_ASSIGNMENT.md`
 
@@ -283,7 +295,9 @@ Lesson resources:
 ## Core Design Principles
 
 ### 1. Single Responsibility Principle
+
 Each function performs **exactly one conceptual task**:
+
 - **`data_preprocessing.py`**: Loading, cleaning, and splitting data
 - **`feature_engineering.py`**: Encoding, scaling, and feature transformation
 - **`train.py`**: Model instantiation and training
@@ -292,14 +306,18 @@ Each function performs **exactly one conceptual task**:
 - **`persistence.py`**: Saving and loading artifacts
 
 ### 2. Clear Input/Output Contracts
+
 All functions use:
+
 - **Type hints** for parameters and return types
 - **Comprehensive docstrings** explaining purpose, parameters, and return values
 - **Explicit parameters** instead of relying on global state
 - **Structured returns** (dictionaries, tuples) instead of printing
 
 ### 3. Configuration Centralization (`config.py`)
+
 All configuration lives in one place:
+
 - File paths (data, models, reports)
 - Random states for reproducibility
 - Hyperparameters
@@ -308,7 +326,9 @@ All configuration lives in one place:
 This makes it trivial to modify parameters without touching function implementations.
 
 ### 4. Data Leakage Prevention
+
 The pipeline enforces proper train/test isolation:
+
 - **Training** uses `fit_transform()` to learn transformations from training data
 - **Inference** uses `transform()` to apply fitted transformations without refitting
 - This is enforced by function signatures and separation of concerns
@@ -318,17 +338,21 @@ The pipeline enforces proper train/test isolation:
 ## Module Descriptions
 
 ### `config.py`
+
 Centralized configuration for the entire pipeline. Every path, parameter, and column specification is defined here.
 
 **Key Features:**
+
 - `Config` class with static methods for directory creation
 - `ensure_directories()` creates output folders on demand
 - All hyperparameters and evaluation metrics centralized
 
 ### `data_preprocessing.py`
+
 Data loading, cleaning, and train/test splitting.
 
 **Functions:**
+
 - `load_data()` - Read CSV files
 - `handle_missing_values()` - Fill NaNs with configurable strategy
 - `remove_duplicates()` - Remove duplicate rows
@@ -336,9 +360,11 @@ Data loading, cleaning, and train/test splitting.
 - `clean_data()` - Orchestrator combining multiple cleaning steps
 
 ### `feature_engineering.py`
+
 Feature encoding, scaling, and pipeline construction.
 
 **Functions:**
+
 - `encode_categorical_features()` - One-hot encode categorical variables
 - `scale_numerical_features()` - Standardize numerical features
 - `create_derived_features()` - Engineer new features from existing ones
@@ -349,35 +375,43 @@ Feature encoding, scaling, and pipeline construction.
 **CRITICAL:** Separates `fit=True` (training) from `fit=False` (inference) to prevent data leakage.
 
 ### `train.py`
+
 Model instantiation and training.
 
 **Functions:**
+
 - `train_model()` - Fit model on training data, return artifact
 - `train_with_validation()` - Train and track validation performance
 
 **Key Features:**
+
 - Receives prepared feature data (no preprocessing inside function)
 - Returns fitted model object (not saved by training function)
 - Supports multiple model types via configuration
 
 ### `evaluate.py`
+
 Model evaluation and metrics computation.
 
 **Functions:**
+
 - `evaluate_model()` - Compute multiple metrics, return dictionary
 - `compute_confusion_matrix()` - Generate confusion matrix
 - `get_classification_report()` - Detailed per-class metrics
 - `compare_metrics()` - Compare current vs baseline performance
 
 **Key Features:**
+
 - Returns metrics as structured data, doesn't print
 - Supports multiple metric types through configuration
 - Enables programmatic metric aggregation and logging
 
 ### `predict.py`
+
 Inference on new data using saved artifacts.
 
 **Functions:**
+
 - `load_artifacts()` - Load saved model and pipeline
 - `preprocess_new_data()` - Apply fitted transformations (transform only, never fit)
 - `predict()` - Generate predictions on new data
@@ -387,9 +421,11 @@ Inference on new data using saved artifacts.
 **CRITICAL:** Only calls `transform()` on preprocessing pipeline, never `fit_transform()`, preventing data leakage during inference.
 
 ### `persistence.py`
+
 Saving and loading model artifacts.
 
 **Functions:**
+
 - `save_model()` - Serialize fitted model to pickle
 - `save_pipeline()` - Serialize preprocessing pipeline
 - `save_artifacts()` - Save both model and pipeline together
@@ -398,14 +434,26 @@ Saving and loading model artifacts.
 
 ---
 
+## **Feature & Target Definitions**
+
+- **Target column:** `is_delayed` — Binary classification (1 = delivery delayed, 0 = on-time). This represents whether a delivery missed its expected delivery window and is available in historical records after the delivery completes.
+- **Problem type:** Binary classification. Recommended metrics: Precision, Recall, F1, ROC-AUC (already configured in `src/config.py`).
+- **Numerical features:** `distance_km`, `items_count`, `order_value`, `day_of_month` — all available at dispatch time and represent shipment characteristics and timing.
+- **Categorical features:** `zone`, `day_of_week`, `peak_hour` — represent routing and temporal buckets known at prediction time.
+- **Excluded columns:** `delivery_id` (identifier), `created_at` / `updated_at` (raw timestamps). These are excluded to avoid identifier leakage and raw timestamp misuse; derive temporal features instead (e.g., days since order).
+
+Validation and separation are enforced in `src/data_preprocessing.py` via `validate_feature_definition()` and the `src/inspection.py` helper demonstrates correct separation of `X` and `y` and prints basic distribution statistics for features and the target.
+
 ## How to Use
 
 ### 1. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 2. Create Sample Data
+
 ```bash
 python create_sample_data.py
 ```
@@ -413,11 +461,13 @@ python create_sample_data.py
 This generates synthetic delivery data for testing. Replace with your own data in `data/raw/delivery_data.csv`.
 
 ### 3. Run Complete Pipeline
+
 ```bash
 python main.py
 ```
 
 This executes:
+
 1. Load and clean data
 2. Split into train/test sets
 3. Engineer features
@@ -429,6 +479,7 @@ This executes:
 Execution logs are saved to `logs/pipeline.log`.
 
 ### 4. Use Model for New Predictions
+
 ```python
 from src.predict import load_artifacts, predict
 import pandas as pd
@@ -502,26 +553,29 @@ assert model is not None
 ## Lesson Materials
 
 ### Lesson 5.7: Reviewing Python Functions and Imports for ML Workflows
+
 This project itself is the assignment—demonstrating:
+
 - Clean function design with type hints and docstrings
 - Proper import management avoiding circular dependencies
 - Reusable functions at both training and inference time
 - Production-ready ML pipeline architecture
 
 ### Lesson 5.8: Structuring Python Files and Modules for Model Code
+
 Additional learning materials included:
 
 - **`LESSON_5_8_GUIDE.py`** (550+ lines)
   - 9 comprehensive sections on module structuring
   - 40+ code examples showing best practices and anti-patterns
   - Covers: directory structure, module responsibilities, import management, data leakage prevention, testing patterns
-  
 - **`LESSON_5_8_ASSIGNMENT.md`** (400+ lines)
   - Maps all lesson concepts to this project
   - Shows how the delivery delay pipeline implements each principle
   - Includes implementation recommendations and checklists
 
 ### Lesson 5.9: Creating a Virtual Environment for an ML Project
+
 Foundation for reproducible, portable ML systems:
 
 - **`LESSON_5_9_GUIDE.py`** (600+ lines)
@@ -545,6 +599,7 @@ Foundation for reproducible, portable ML systems:
   - Example: Environment-specific files never committed to version control
 
 ### Lesson 5.10: Managing Dependencies Using requirements.txt
+
 Dependency control and reproducibility discipline:
 
 - **`LESSON_5_10_GUIDE.py`**
@@ -560,6 +615,7 @@ Dependency control and reproducibility discipline:
   - Reflection prompts for ML reproducibility thinking
 
 ### Lesson 5.11: Creating an ML Project Folder Structure
+
 Architecture and repository design discipline:
 
 - **`LESSON_5_11_GUIDE.py`**
@@ -575,6 +631,7 @@ Architecture and repository design discipline:
   - Reflection prompts on structure quality
 
 ### Lesson 5.12: Separating Data Loading, Training, and Inference
+
 Architectural separation and layer design:
 
 - **`LESSON_5_12_GUIDE.py`**
@@ -594,6 +651,7 @@ Architectural separation and layer design:
   - Document architectural decisions and benefits
 
 ### Lesson 5.13: Understanding Supervised Learning Problem Types
+
 Foundational framework for problem identification and model selection:
 
 - **`LESSON_5_13_GUIDE.py`** (400+ lines)
@@ -622,28 +680,33 @@ Foundational framework for problem identification and model selection:
 ## Key Engineering Principles Demonstrated
 
 ### ✅ Reproducibility
+
 - **Random state** controlled in all operations
 - **Configuration** centralized and version-controlled
 - **Artifacts** saved for exact reproduction without retraining
 
 ### ✅ Modularity
+
 - Each function has **single responsibility**
 - Functions **independently testable**
 - **No hidden dependencies** through global state
 - **Clean imports** of only required functions
 
 ### ✅ Separation of Concerns
+
 - **Data pipeline** (load → clean → split) separate from **ML pipeline** (train → evaluate)
 - **Training** separate from **inference**
 - **Preprocessing** strictly isolated from **model logic**
 
 ### ✅ Production Readiness
+
 - **Artifact persistence** enables deployment without retraining
 - **Proper error handling** and validation
 - **Logging** tracks execution and issues
 - **Configuration** externalizable for different environments
 
 ### ✅ Data Integrity
+
 - **Train/test isolation** enforced by function signatures
 - **Data leakage prevention** through fit/transform separation
 - **Validation** of required columns and data shapes
@@ -654,6 +717,7 @@ Foundational framework for problem identification and model selection:
 ## Common Patterns
 
 ### Pattern 1: Training with Config
+
 ```python
 from src.config import Config
 from src.train import train_model
@@ -665,6 +729,7 @@ model = train_model(
 ```
 
 ### Pattern 2: Feature Processing (Training)
+
 ```python
 from src.feature_engineering import prepare_features
 
@@ -675,6 +740,7 @@ X_train_prepared, pipeline = prepare_features(
 ```
 
 ### Pattern 3: Feature Processing (Inference)
+
 ```python
 X_test_prepared, _ = prepare_features(
     X_test,
@@ -684,6 +750,7 @@ X_test_prepared, _ = prepare_features(
 ```
 
 ### Pattern 4: Evaluation and Metrics
+
 ```python
 from src.evaluate import evaluate_model
 
@@ -694,6 +761,7 @@ print(f"F1 Score: {metrics['f1']:.4f}")
 ```
 
 ### Pattern 5: Inference on New Data
+
 ```python
 from src.predict import load_artifacts, predict
 
@@ -709,6 +777,7 @@ results_df['prediction'] = predictions
 ## Why This Structure Matters
 
 ### Without Modularization
+
 ```
 (Fragile notebook code)
 ↓
@@ -721,6 +790,7 @@ Cannot deploy
 ```
 
 ### With Modularization
+
 ```
 (Clean, separate modules)
 ↓
@@ -788,40 +858,44 @@ The ML workflow in this repository maps as:
 Data -> Features -> Model -> Evaluation
 
 ### 1. Data Stage
+
 - Source: raw order and delivery logs with timestamps and location metadata.
 - Code location: preprocessing script.
 - Typical operations:
-	- Parse timestamp columns into datetime format.
-	- Remove impossible records (delivery before order time).
-	- Standardize zone names and city labels.
-	- Handle null values in timestamps or location fields.
+  - Parse timestamp columns into datetime format.
+  - Remove impossible records (delivery before order time).
+  - Standardize zone names and city labels.
+  - Handle null values in timestamps or location fields.
 
 ### 2. Feature Stage
+
 - Code location: feature engineering script.
 - Example features for this problem:
-	- delivery_duration_minutes = delivered_time - order_time
-	- is_peak_hour (binary)
-	- day_of_week
-	- zone_average_delay_last_7_days
-	- rider_load_in_last_hour
+  - delivery_duration_minutes = delivered_time - order_time
+  - is_peak_hour (binary)
+  - day_of_week
+  - zone_average_delay_last_7_days
+  - rider_load_in_last_hour
 - Why this matters: these features convert raw logs into numerical signals that capture operational behavior, not just raw timestamps.
 
 ### 3. Model Stage
+
 - Code location: training script.
 - Typical approach:
-	- Choose a model suitable for tabular operational data (for example gradient boosting or random forest).
-	- Split training and validation sets.
-	- Fit model and store trained artifact in models.
+  - Choose a model suitable for tabular operational data (for example gradient boosting or random forest).
+  - Split training and validation sets.
+  - Fit model and store trained artifact in models.
 - Output: reusable model file, not just notebook metrics.
 
 ### 4. Evaluation Stage
+
 - Code location: evaluation script + report file.
 - Typical metrics:
-	- Regression target (delay minutes): MAE and RMSE.
-	- Classification target (delayed or not): precision, recall, F1, ROC-AUC.
+  - Regression target (delay minutes): MAE and RMSE.
+  - Classification target (delayed or not): precision, recall, F1, ROC-AUC.
 - Expected review check:
-	- Metrics must be computed on unseen data.
-	- Results should be compared to a baseline such as median-delay predictor.
+  - Metrics must be computed on unseen data.
+  - Results should be compared to a baseline such as median-delay predictor.
 
 This trace confirms where each pipeline stage lives and how data transitions from raw logs to measurable performance outcomes.
 
@@ -830,9 +904,11 @@ This trace confirms where each pipeline stage lives and how data transitions fro
 ## One Specific Strength
 
 ### Strength: Clear pipeline modularity
+
 The project separates preprocessing, feature engineering, training, and evaluation into dedicated scripts instead of mixing everything into one notebook.
 
 Why this is strong:
+
 - Prevents hidden coupling between steps.
 - Makes debugging faster when delays spike in production.
 - Enables consistent reuse of transformations at inference time.
@@ -845,14 +921,17 @@ This is a sign of production-minded project design.
 ## One Specific Weakness and Improvement Opportunity
 
 ### Weakness: Risk of temporal leakage
+
 A common weakness in delivery-delay projects is performing random train-test splits on timestamped data, which can leak future behavior into training.
 
 Why this is a problem:
+
 - Delivery behavior changes over time (seasonality, weather, staffing changes).
 - Random splitting can make evaluation look better than real-world performance.
 - Deployment accuracy may drop because the model has effectively seen future patterns.
 
 How to fix:
+
 - Use time-based splits (train on earlier period, validate on later period).
 - Fit all preprocessing statistics on training period only.
 - Add backtesting by weekly or monthly windows.
@@ -877,6 +956,7 @@ This improvement directly increases trustworthiness of evaluation results.
 ## Final Interpretation
 
 This repository pattern is suitable for the food-delivery reliability problem because it supports:
+
 - End-to-end delay analysis from timestamps to actionable risk signals.
 - Identification of high-risk zones and peak delay windows through engineered features.
 - A reproducible evaluation process that can be audited and improved.
@@ -898,4 +978,3 @@ Use this sequence while recording:
 This demonstrates conceptual understanding instead of code recitation.
 
 ---
-
