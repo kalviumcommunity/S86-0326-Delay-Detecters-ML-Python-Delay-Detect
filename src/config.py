@@ -37,6 +37,12 @@ VALIDATION_SIZE = 0.1
 CATEGORICAL_COLS = ["zone", "day_of_week", "peak_hour"]
 NUMERICAL_COLS = ["distance_km", "items_count", "order_value", "day_of_month"]
 
+# Explicit exclusions (identifiers, post-outcome columns, raw timestamps, etc.)
+EXCLUDED_COLUMNS = ["delivery_id", "created_at", "updated_at"]
+
+# Combined feature list used throughout the pipeline
+ALL_FEATURES = NUMERICAL_COLS + CATEGORICAL_COLS
+
 # Model hyperparameters
 MODEL_HYPERPARAMS = {
     "n_estimators": 100,
@@ -70,6 +76,8 @@ class Config:
     # Feature columns
     CATEGORICAL_COLS = CATEGORICAL_COLS
     NUMERICAL_COLS = NUMERICAL_COLS
+    EXCLUDED_COLUMNS = EXCLUDED_COLUMNS
+    ALL_FEATURES = ALL_FEATURES
 
     # Model settings
     MODEL_HYPERPARAMS = MODEL_HYPERPARAMS
