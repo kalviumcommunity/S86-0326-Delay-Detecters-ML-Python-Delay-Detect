@@ -2,7 +2,7 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Seven Complete Lessons:**
+**Eight Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (23 unit tests, all passing)
@@ -11,6 +11,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.11**: Professional ML Folder Structure (separation of concerns and artifact flow)
 - **Lesson 5.12**: Separating Data Loading, Training, and Inference (architectural discipline)
 - **Lesson 5.13**: Understanding Supervised Learning Problem Types (classification vs regression, metrics, pitfalls)
+- **Lesson 5.16**: Splitting Data into Training and Testing Sets (evaluation integrity, leakage prevention)
 
 ---
 
@@ -96,6 +97,8 @@ ML-python/
 ├── LESSON_5_12_ASSIGNMENT.md          # Layer validation and architectural review assignment
 ├── LESSON_5_13_GUIDE.py               # Problem type identification guide (400+ lines)
 ├── LESSON_5_13_ASSIGNMENT.md          # Supervised learning problem analysis and classification
+├── LESSON_5_16_GUIDE.py               # Train-test splitting and leakage prevention guide (500+ lines)
+├── LESSON_5_16_ASSIGNMENT.md          # Data splitting verification and leakage detection assignment
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
@@ -674,6 +677,36 @@ Foundational framework for problem identification and model selection:
   - Part E: Match algorithms to problem types with reasoned justification
   - Part F: Real-world scenarios requiring problem type analysis
   - Part G: Reflection questions to solidify understanding
+
+### Lesson 5.16: Splitting Data into Training and Testing Sets
+
+Foundational data integrity and honest evaluation:
+
+- **`LESSON_5_16_GUIDE.py`** (500+ lines)
+  - Why data splitting is necessary (memorization vs generalization)
+  - Training set vs testing set responsibilities and boundaries
+  - Standard train-test split ratio and parameters
+  - Stratified splitting for classification (preserving class balance)
+  - The critical rule: split BEFORE fitting any transformations
+  - Why fitting before splitting causes data leakage
+  - Time-based splitting for temporal data (respect chronological order)
+  - Common leakage mistakes: oversampling, feature selection, hyperparameter tuning
+  - Verifying splits: shape checks, overlap verification, class distribution analysis
+  - Cross-validation vs train-test split: different purposes
+  - Best practices: end-to-end splitting workflow
+  - Documentation and transparency
+  - Mental models of train-test boundaries
+
+- **`LESSON_5_16_ASSIGNMENT.md`** (600+ lines)
+  - Part A: Verify your project's train-test split and stratification
+  - Part B: Identify leakage in three incorrect scaling/selection/oversampling approaches
+  - Part C: Analyze class balance and stratification in delivery delay prediction
+  - Part D: Decide appropriate split strategy for 5 real-world scenarios
+  - Part E: Analyze real-world leakage scenarios (hyperparameter tuning, model comparison)
+  - Part F: Understand cross-validation vs train-test split differences
+  - Part G: Run verification script and document split integrity
+  - Part H: Write documentation for your project's splitting strategy
+  - Part I: Reflection questions on evaluation integrity
 
 ---
 
