@@ -50,6 +50,8 @@ This project demonstrates **professional ML engineering principles** through a m
 
 ---
 
+Extras added for the data leakage assignment: `notebooks/lesson_data_leakage.ipynb` (summary notebook) and `scripts/leak_demo.py` (runnable demo showing leakage vs correct pipeline).
+
 ## Project Structure
 
 ```
