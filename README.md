@@ -54,6 +54,8 @@ Extras added for the data leakage assignment: `notebooks/lesson_data_leakage.ipy
 
 Feature-selection materials added: `notebooks/lesson_selecting_features.ipynb` and `scripts/select_features_demo.py` demonstrate practical heuristics and checks for separating numerical and categorical features.
 
+Scaling materials added: `notebooks/lesson_scaling.ipynb` and `scripts/scale_demo.py` demonstrate correct StandardScaler usage, ColumnTransformer integration, and saving the preprocessor for production.
+
 ## Project Structure
 
 ```

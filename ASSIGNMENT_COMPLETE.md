@@ -68,6 +68,8 @@ ML-python/
 ✅ `apply_preprocessing_pipeline()` - Apply with **explicit fit control**
 ✅ **CRITICAL**: Prevents data leakage through fit=True (train) vs fit=False (inference)
 
+| **Scaling** | Added notebook and full pipeline demo for StandardScaler | notebooks/lesson_scaling.ipynb and scripts/scale_demo.py |
+
 ### 4. **train.py** — Model Training
 
 ✅ `train_model()` - Fit model, return artifact
