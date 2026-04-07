@@ -52,6 +52,8 @@ This project demonstrates **professional ML engineering principles** through a m
 
 Extras added for the data leakage assignment: `notebooks/lesson_data_leakage.ipynb` (summary notebook) and `scripts/leak_demo.py` (runnable demo showing leakage vs correct pipeline).
 
+Feature-selection materials added: `notebooks/lesson_selecting_features.ipynb` and `scripts/select_features_demo.py` demonstrate practical heuristics and checks for separating numerical and categorical features.
+
 ## Project Structure
 
 ```
