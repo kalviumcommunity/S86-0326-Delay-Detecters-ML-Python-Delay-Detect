@@ -421,18 +421,19 @@ results_df.to_csv('predictions.csv')
 
 ## 📈 Benefits Achieved
 
-| Aspect                         | Before                                          | After                                                        |
-| ------------------------------ | ----------------------------------------------- | ------------------------------------------------------------ |
-| **Code Organization**          | Monolithic notebook                             | 8 focused modules                                            |
-| **Reusability**                | Copy-paste                                      | Import and use                                               |
-| **Testing**                    | Can't isolate                                   | Each module testable                                         |
-| **Debugging**                  | Hard to locate issues                           | Clear responsibility                                         |
-| **Data Leakage**               | Easy to accidentally refit                      | Prevented by design                                          |
-| **Deployment**                 | Can't separate train from inference             | Artifacts persist independ                                   |
-| **Extras for this assignment** | Added interactive notebook and leak demo script | notebooks/lesson_data_leakage.ipynb and scripts/leak_demo.py |
-| **Collaboration**              | Merge conflicts                                 | Clean modules                                                |
-| **Parameter Changes**          | Scattered throughout code                       | config.py only                                               |
-| **Reproducibility**            | Random and unclear                              | All randomness controlled                                    |
+| Aspect                         | Before                                              | After                                                                         |
+| ------------------------------ | --------------------------------------------------- | ----------------------------------------------------------------------------- |
+| **Code Organization**          | Monolithic notebook                                 | 8 focused modules                                                             |
+| **Reusability**                | Copy-paste                                          | Import and use                                                                |
+| **Testing**                    | Can't isolate                                       | Each module testable                                                          |
+| **Debugging**                  | Hard to locate issues                               | Clear responsibility                                                          |
+| **Data Leakage**               | Easy to accidentally refit                          | Prevented by design                                                           |
+| **Deployment**                 | Can't separate train from inference                 | Artifacts persist independ                                                    |
+| **Extras for this assignment** | Added interactive notebook and leak demo script     | notebooks/lesson_data_leakage.ipynb and scripts/leak_demo.py                  |
+| **Feature selection**          | Added notebook and demo for selecting feature types | notebooks/lesson_selecting_features.ipynb and scripts/select_features_demo.py |
+| **Collaboration**              | Merge conflicts                                     | Clean modules                                                                 |
+| **Parameter Changes**          | Scattered throughout code                           | config.py only                                                                |
+| **Reproducibility**            | Random and unclear                                  | All randomness controlled                                                     |
 
 ---
 
