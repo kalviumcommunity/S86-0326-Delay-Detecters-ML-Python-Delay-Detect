@@ -104,6 +104,19 @@ class TestFeatureEngineering(unittest.TestCase):
         # Both should have numerical columns
         self.assertIn(self.numerical_cols[0], df_scaled_fit.columns)
         self.assertIn(self.numerical_cols[0], df_scaled_transform.columns)
+
+    def test_scale_numerical_features_minmax_range(self):
+        """Test MinMax scaling keeps training numerical values in [0, 1]."""
+        df_scaled, _ = scale_numerical_features(
+            self.df,
+            numerical_cols=self.numerical_cols,
+            scaler_type='minmax',
+            fit=True
+        )
+
+        for col in self.numerical_cols:
+            self.assertGreaterEqual(df_scaled[col].min(), 0.0)
+            self.assertLessEqual(df_scaled[col].max(), 1.0)
     
     def test_build_preprocessing_pipeline_returns_pipeline(self):
         """Test that building pipeline returns a pipeline object."""
