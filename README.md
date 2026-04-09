@@ -2,10 +2,10 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Eight Complete Lessons:**
+**Nine Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
-- **Lesson 5.8**: Structuring Modules for Model Code (23 unit tests, all passing)
+- **Lesson 5.8**: Structuring Modules for Model Code (30 unit tests, all passing)
 - **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
 - **Lesson 5.10**: Dependency Management with requirements.txt (strict pinning & reproducibility)
 - **Lesson 5.11**: Professional ML Folder Structure (separation of concerns and artifact flow)
@@ -13,6 +13,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.13**: Understanding Supervised Learning Problem Types (classification vs regression, metrics, pitfalls)
 - **Lesson 5.16**: Splitting Data into Training and Testing Sets (evaluation integrity, leakage prevention)
 - **Lesson 5.20**: Normalizing Features with MinMaxScaler (bounded scaling, outlier caveats, leakage-safe pipelines)
+- **Lesson 5.21**: Creating Baseline Models with Simple Heuristics (dummy models, heuristic checks, honest performance floors)
 
 ---
 
@@ -57,6 +58,7 @@ Feature-selection materials added: `notebooks/lesson_selecting_features.ipynb` a
 
 Scaling materials added: `notebooks/lesson_scaling.ipynb` and `scripts/scale_demo.py` demonstrate correct StandardScaler usage, ColumnTransformer integration, and saving the preprocessor for production.
 MinMax normalization materials added: `LESSON_5_20_GUIDE.py`, `LESSON_5_20_ASSIGNMENT.md`, and `scripts/minmax_demo.py` demonstrate leakage-safe normalization with MinMaxScaler and production artifact persistence.
+Baseline modeling materials added: `LESSON_5_21_GUIDE.py`, `LESSON_5_21_ASSIGNMENT.md`, and `scripts/baseline_demo.py` demonstrate majority/heuristic baselines and model-vs-baseline comparison.
 
 ## Project Structure
 
@@ -88,7 +90,8 @@ ML-python/
 │   ├── __init__.py
 │   ├── test_preprocessing.py          # 7 tests for data module
 │   ├── test_feature_engineering.py    # 8 tests for features module
-│   └── test_train.py                  # 8 tests for training module
+│   ├── test_train.py                  # 8 tests for training module
+│   └── test_baselines.py              # Baseline utility tests
 ├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
@@ -109,6 +112,8 @@ ML-python/
 ├── LESSON_5_16_ASSIGNMENT.md          # Data splitting verification and leakage detection assignment
 ├── LESSON_5_20_GUIDE.py               # MinMax normalization guide and production best practices
 ├── LESSON_5_20_ASSIGNMENT.md          # Hands-on MinMaxScaler assignment and leakage checks
+├── LESSON_5_21_GUIDE.py               # Baseline-modeling guide for classification and regression
+├── LESSON_5_21_ASSIGNMENT.md          # Hands-on baseline and heuristic comparison assignment
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
