@@ -7,7 +7,7 @@ variables, scaling numerical features, and constructing preprocessing pipelines.
 
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from typing import Tuple, List
@@ -57,8 +57,9 @@ def scale_numerical_features(
     X: pd.DataFrame,
     numerical_cols: List[str],
     scaler=None,
+    scaler_type: str = "standard",
     fit: bool = True
-) -> Tuple[pd.DataFrame, StandardScaler]:
+) -> Tuple[pd.DataFrame, object]:
     """
     Scale numerical features to zero mean and unit variance.
     
@@ -69,7 +70,8 @@ def scale_numerical_features(
     Parameters:
         X: Feature DataFrame
         numerical_cols: List of numerical column names
-        scaler: Pre-fit StandardScaler instance. If None, creates new scaler.
+        scaler: Pre-fit scaler instance. If None, creates new scaler.
+        scaler_type: Scaling strategy ("standard" or "minmax") when scaler is None.
         fit: Whether to fit the scaler (True for training, False for inference)
     
     Returns:
@@ -86,7 +88,12 @@ def scale_numerical_features(
         raise ValueError(f"Numerical columns not found in DataFrame: {missing_cols}")
     
     if scaler is None:
-        scaler = StandardScaler()
+        if scaler_type == "standard":
+            scaler = StandardScaler()
+        elif scaler_type == "minmax":
+            scaler = MinMaxScaler()
+        else:
+            raise ValueError(f"Unsupported scaler_type: {scaler_type}")
     
     if fit:
         X[numerical_cols] = scaler.fit_transform(X[numerical_cols])
@@ -128,7 +135,8 @@ def create_derived_features(X: pd.DataFrame) -> pd.DataFrame:
 
 def build_preprocessing_pipeline(
     categorical_cols: List[str] = None,
-    numerical_cols: List[str] = None
+    numerical_cols: List[str] = None,
+    scaler_type: str = "standard"
 ) -> Pipeline:
     """
     Construct sklearn ColumnTransformer for data preprocessing.
@@ -140,6 +148,7 @@ def build_preprocessing_pipeline(
     Parameters:
         categorical_cols: List of categorical column names
         numerical_cols: List of numerical column names
+        scaler_type: Scaling strategy for numerical features ("standard" or "minmax")
     
     Returns:
         sklearn Pipeline object for data transformation
@@ -151,8 +160,15 @@ def build_preprocessing_pipeline(
         numerical_cols = Config.NUMERICAL_COLS
     
     # Define transformers
+    if scaler_type == "standard":
+        scaler = StandardScaler()
+    elif scaler_type == "minmax":
+        scaler = MinMaxScaler()
+    else:
+        raise ValueError(f"Unsupported scaler_type: {scaler_type}")
+
     numerical_transformer = Pipeline(
-        steps=[("scaler", StandardScaler())]
+        steps=[("scaler", scaler)]
     )
     
     categorical_transformer = Pipeline(
