@@ -2,10 +2,10 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Fourteen Complete Lessons:**
+**Fifteen Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
-- **Lesson 5.8**: Structuring Modules for Model Code (49 unit tests, all passing)
+- **Lesson 5.8**: Structuring Modules for Model Code (54 unit tests, all passing)
 - **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
 - **Lesson 5.10**: Dependency Management with requirements.txt (strict pinning & reproducibility)
 - **Lesson 5.11**: Professional ML Folder Structure (separation of concerns and artifact flow)
@@ -18,6 +18,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.23**: Evaluating Regression Models Using MAE (business-interpretability, baseline MAE lift, CV stability)
 - **Lesson 5.24**: Evaluating Regression Models Using MSE and R2 (error magnitude + explained variance lens)
 - **Lesson 5.25**: Training a Logistic Regression Classification Model (probabilities, ROC-AUC, odds-ratio interpretation)
+- **Lesson 5.26**: Evaluating Classification Models Using Accuracy (baseline context, balanced accuracy, confusion-matrix lens)
 
 ---
 
@@ -67,6 +68,7 @@ Linear regression materials added: `LESSON_5_22_GUIDE.py`, `LESSON_5_22_ASSIGNME
 MAE evaluation materials added: `LESSON_5_23_GUIDE.py`, `LESSON_5_23_ASSIGNMENT.md`, and `scripts/mae_evaluation_demo.py` demonstrate MAE-first model evaluation and baseline comparison.
 MSE/R2 evaluation materials added: `LESSON_5_24_GUIDE.py`, `LESSON_5_24_ASSIGNMENT.md`, and `scripts/mse_r2_evaluation_demo.py` demonstrate joint absolute/relative regression evaluation.
 Logistic classification materials added: `LESSON_5_25_GUIDE.py`, `LESSON_5_25_ASSIGNMENT.md`, and `scripts/logistic_regression_demo.py` demonstrate baseline-vs-logistic classification evaluation.
+Accuracy evaluation materials added: `LESSON_5_26_GUIDE.py`, `LESSON_5_26_ASSIGNMENT.md`, and `scripts/accuracy_evaluation_demo.py` demonstrate responsible use of accuracy with baseline and balanced accuracy.
 
 ## Project Structure
 
@@ -94,6 +96,7 @@ ML-python/
 │   ├── mae_evaluation.py              # MAE-focused regression evaluation helpers
 │   ├── mse_r2_evaluation.py           # MSE/R2-focused regression evaluation helpers
 │   ├── logistic_classification.py     # Logistic classification training/evaluation helpers
+│   ├── accuracy_evaluation.py         # Accuracy-focused classification evaluation helpers
 │   ├── train.py                       # Model training
 │   ├── evaluate.py                    # Model evaluation
 │   ├── predict.py                     # Inference on new data
@@ -107,7 +110,8 @@ ML-python/
 │   ├── test_regression.py             # Linear regression utility tests
 │   ├── test_mae_evaluation.py         # MAE evaluation utility tests
 │   ├── test_mse_r2_evaluation.py      # MSE/R2 evaluation utility tests
-│   └── test_logistic_classification.py # Logistic classification utility tests
+│   ├── test_logistic_classification.py # Logistic classification utility tests
+│   └── test_accuracy_evaluation.py    # Accuracy evaluation utility tests
 ├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
@@ -138,6 +142,8 @@ ML-python/
 ├── LESSON_5_24_ASSIGNMENT.md          # MSE/R2 evaluation assignment with baseline comparison
 ├── LESSON_5_25_GUIDE.py               # Logistic regression classification guide
 ├── LESSON_5_25_ASSIGNMENT.md          # Baseline-vs-logistic classification assignment
+├── LESSON_5_26_GUIDE.py               # Accuracy evaluation guide for classification
+├── LESSON_5_26_ASSIGNMENT.md          # Accuracy evaluation assignment with baseline context
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
