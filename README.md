@@ -2,7 +2,7 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Nine Complete Lessons:**
+**Eleven Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (30 unit tests, all passing)
@@ -14,6 +14,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.16**: Splitting Data into Training and Testing Sets (evaluation integrity, leakage prevention)
 - **Lesson 5.20**: Normalizing Features with MinMaxScaler (bounded scaling, outlier caveats, leakage-safe pipelines)
 - **Lesson 5.21**: Creating Baseline Models with Simple Heuristics (dummy models, heuristic checks, honest performance floors)
+- **Lesson 5.22**: Training a Linear Regression Model (baseline comparison, CV stability, coefficient interpretation)
 
 ---
 
@@ -59,6 +60,7 @@ Feature-selection materials added: `notebooks/lesson_selecting_features.ipynb` a
 Scaling materials added: `notebooks/lesson_scaling.ipynb` and `scripts/scale_demo.py` demonstrate correct StandardScaler usage, ColumnTransformer integration, and saving the preprocessor for production.
 MinMax normalization materials added: `LESSON_5_20_GUIDE.py`, `LESSON_5_20_ASSIGNMENT.md`, and `scripts/minmax_demo.py` demonstrate leakage-safe normalization with MinMaxScaler and production artifact persistence.
 Baseline modeling materials added: `LESSON_5_21_GUIDE.py`, `LESSON_5_21_ASSIGNMENT.md`, and `scripts/baseline_demo.py` demonstrate majority/heuristic baselines and model-vs-baseline comparison.
+Linear regression materials added: `LESSON_5_22_GUIDE.py`, `LESSON_5_22_ASSIGNMENT.md`, and `scripts/linear_regression_demo.py` demonstrate baseline-vs-model regression evaluation and coefficient analysis.
 
 ## Project Structure
 
@@ -82,6 +84,7 @@ ML-python/
 │   ├── config.py                      # Centralized configuration
 │   ├── data_preprocessing.py          # Load, clean, split data
 │   ├── feature_engineering.py         # Encode, scale, transform features
+│   ├── regression.py                  # Linear regression utilities and evaluation
 │   ├── train.py                       # Model training
 │   ├── evaluate.py                    # Model evaluation
 │   ├── predict.py                     # Inference on new data
@@ -91,7 +94,8 @@ ML-python/
 │   ├── test_preprocessing.py          # 7 tests for data module
 │   ├── test_feature_engineering.py    # 8 tests for features module
 │   ├── test_train.py                  # 8 tests for training module
-│   └── test_baselines.py              # Baseline utility tests
+│   ├── test_baselines.py              # Baseline utility tests
+│   └── test_regression.py             # Linear regression utility tests
 ├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
@@ -114,6 +118,8 @@ ML-python/
 ├── LESSON_5_20_ASSIGNMENT.md          # Hands-on MinMaxScaler assignment and leakage checks
 ├── LESSON_5_21_GUIDE.py               # Baseline-modeling guide for classification and regression
 ├── LESSON_5_21_ASSIGNMENT.md          # Hands-on baseline and heuristic comparison assignment
+├── LESSON_5_22_GUIDE.py               # Linear regression guide and interpretation workflow
+├── LESSON_5_22_ASSIGNMENT.md          # Baseline-vs-linear regression assignment
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
