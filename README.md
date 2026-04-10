@@ -2,10 +2,10 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Twelve Complete Lessons:**
+**Thirteen Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
-- **Lesson 5.8**: Structuring Modules for Model Code (40 unit tests, all passing)
+- **Lesson 5.8**: Structuring Modules for Model Code (44 unit tests, all passing)
 - **Lesson 5.9**: Virtual Environments for ML Projects (venv setup & best practices)
 - **Lesson 5.10**: Dependency Management with requirements.txt (strict pinning & reproducibility)
 - **Lesson 5.11**: Professional ML Folder Structure (separation of concerns and artifact flow)
@@ -16,6 +16,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.21**: Creating Baseline Models with Simple Heuristics (dummy models, heuristic checks, honest performance floors)
 - **Lesson 5.22**: Training a Linear Regression Model (baseline comparison, CV stability, coefficient interpretation)
 - **Lesson 5.23**: Evaluating Regression Models Using MAE (business-interpretability, baseline MAE lift, CV stability)
+- **Lesson 5.24**: Evaluating Regression Models Using MSE and R2 (error magnitude + explained variance lens)
 
 ---
 
@@ -63,6 +64,7 @@ MinMax normalization materials added: `LESSON_5_20_GUIDE.py`, `LESSON_5_20_ASSIG
 Baseline modeling materials added: `LESSON_5_21_GUIDE.py`, `LESSON_5_21_ASSIGNMENT.md`, and `scripts/baseline_demo.py` demonstrate majority/heuristic baselines and model-vs-baseline comparison.
 Linear regression materials added: `LESSON_5_22_GUIDE.py`, `LESSON_5_22_ASSIGNMENT.md`, and `scripts/linear_regression_demo.py` demonstrate baseline-vs-model regression evaluation and coefficient analysis.
 MAE evaluation materials added: `LESSON_5_23_GUIDE.py`, `LESSON_5_23_ASSIGNMENT.md`, and `scripts/mae_evaluation_demo.py` demonstrate MAE-first model evaluation and baseline comparison.
+MSE/R2 evaluation materials added: `LESSON_5_24_GUIDE.py`, `LESSON_5_24_ASSIGNMENT.md`, and `scripts/mse_r2_evaluation_demo.py` demonstrate joint absolute/relative regression evaluation.
 
 ## Project Structure
 
@@ -88,6 +90,7 @@ ML-python/
 │   ├── feature_engineering.py         # Encode, scale, transform features
 │   ├── regression.py                  # Linear regression utilities and evaluation
 │   ├── mae_evaluation.py              # MAE-focused regression evaluation helpers
+│   ├── mse_r2_evaluation.py           # MSE/R2-focused regression evaluation helpers
 │   ├── train.py                       # Model training
 │   ├── evaluate.py                    # Model evaluation
 │   ├── predict.py                     # Inference on new data
@@ -99,7 +102,8 @@ ML-python/
 │   ├── test_train.py                  # 8 tests for training module
 │   ├── test_baselines.py              # Baseline utility tests
 │   ├── test_regression.py             # Linear regression utility tests
-│   └── test_mae_evaluation.py         # MAE evaluation utility tests
+│   ├── test_mae_evaluation.py         # MAE evaluation utility tests
+│   └── test_mse_r2_evaluation.py      # MSE/R2 evaluation utility tests
 ├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
@@ -126,6 +130,8 @@ ML-python/
 ├── LESSON_5_22_ASSIGNMENT.md          # Baseline-vs-linear regression assignment
 ├── LESSON_5_23_GUIDE.py               # MAE-focused regression evaluation guide
 ├── LESSON_5_23_ASSIGNMENT.md          # MAE evaluation assignment with baseline comparison
+├── LESSON_5_24_GUIDE.py               # MSE/R2 regression evaluation guide
+├── LESSON_5_24_ASSIGNMENT.md          # MSE/R2 evaluation assignment with baseline comparison
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
