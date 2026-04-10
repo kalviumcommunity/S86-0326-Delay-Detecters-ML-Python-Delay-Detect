@@ -2,7 +2,7 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Seventeen Complete Lessons:**
+**Eighteen Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (67 unit tests, all passing)
@@ -21,6 +21,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.26**: Evaluating Classification Models Using Accuracy (baseline context, balanced accuracy, confusion-matrix lens)
 - **Lesson 5.27**: Evaluating Classification Models Using Precision and Recall (threshold trade-offs and asymmetric error costs)
 - **Lesson 5.28**: Evaluating Classification Models Using F1-Score (precision-recall balance and threshold selection)
+- **Lesson 5.29**: Creating and Interpreting a Confusion Matrix (error-type visibility, threshold reshaping, multiclass confusion patterns)
 
 ---
 
@@ -73,6 +74,7 @@ Logistic classification materials added: `LESSON_5_25_GUIDE.py`, `LESSON_5_25_AS
 Accuracy evaluation materials added: `LESSON_5_26_GUIDE.py`, `LESSON_5_26_ASSIGNMENT.md`, and `scripts/accuracy_evaluation_demo.py` demonstrate responsible use of accuracy with baseline and balanced accuracy.
 Precision/Recall materials added: `LESSON_5_27_GUIDE.py`, `LESSON_5_27_ASSIGNMENT.md`, and `scripts/precision_recall_demo.py` demonstrate threshold tuning and precision-recall trade-off analysis.
 F1-score materials added: `LESSON_5_28_GUIDE.py`, `LESSON_5_28_ASSIGNMENT.md`, and `scripts/f1_evaluation_demo.py` demonstrate F1-centric classification evaluation and validation-set threshold tuning.
+Confusion matrix materials added: `LESSON_5_29_GUIDE.py`, `LESSON_5_29_ASSIGNMENT.md`, and `scripts/confusion_matrix_demo.py` demonstrate count-level error analysis, normalization, threshold effects, and multiclass confusion interpretation.
 
 ## Project Structure
 
@@ -103,6 +105,7 @@ ML-python/
 │   ├── accuracy_evaluation.py         # Accuracy-focused classification evaluation helpers
 │   ├── precision_recall_evaluation.py # Precision/Recall-focused classification evaluation helpers
 │   ├── f1_evaluation.py               # F1-focused classification evaluation helpers
+│   ├── confusion_matrix_evaluation.py # Confusion-matrix-focused classification evaluation helpers
 │   ├── train.py                       # Model training
 │   ├── evaluate.py                    # Model evaluation
 │   ├── predict.py                     # Inference on new data
@@ -120,6 +123,7 @@ ML-python/
 │   ├── test_accuracy_evaluation.py    # Accuracy evaluation utility tests
 │   ├── test_precision_recall_evaluation.py # Precision/Recall evaluation utility tests
 │   └── test_f1_evaluation.py          # F1 evaluation utility tests
+│   └── test_confusion_matrix_evaluation.py # Confusion-matrix evaluation utility tests
 ├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
@@ -156,6 +160,8 @@ ML-python/
 ├── LESSON_5_27_ASSIGNMENT.md          # Precision/Recall assignment with threshold tuning
 ├── LESSON_5_28_GUIDE.py               # F1-score evaluation guide for classification
 ├── LESSON_5_28_ASSIGNMENT.md          # F1-score assignment with threshold optimization
+├── LESSON_5_29_GUIDE.py               # Confusion matrix interpretation guide for classification
+├── LESSON_5_29_ASSIGNMENT.md          # Confusion matrix assignment with threshold and multiclass analysis
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
