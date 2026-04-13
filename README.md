@@ -2,7 +2,7 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Nineteen Complete Lessons:**
+**Twenty Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (67 unit tests, all passing)
@@ -23,6 +23,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.28**: Evaluating Classification Models Using F1-Score (precision-recall balance and threshold selection)
 - **Lesson 5.29**: Creating and Interpreting a Confusion Matrix (error-type visibility, threshold reshaping, multiclass confusion patterns)
 - **Lesson 5.30**: Training a K-Nearest Neighbours (KNN) Model (distance-based learning, K tuning, scaling discipline)
+- **Lesson 5.31**: Understanding Bias and Variance Through Model Behavior (underfitting vs overfitting diagnostics, learning curves, and targeted fixes)
 
 ---
 
@@ -77,6 +78,7 @@ Precision/Recall materials added: `LESSON_5_27_GUIDE.py`, `LESSON_5_27_ASSIGNMEN
 F1-score materials added: `LESSON_5_28_GUIDE.py`, `LESSON_5_28_ASSIGNMENT.md`, and `scripts/f1_evaluation_demo.py` demonstrate F1-centric classification evaluation and validation-set threshold tuning.
 Confusion matrix materials added: `LESSON_5_29_GUIDE.py`, `LESSON_5_29_ASSIGNMENT.md`, and `scripts/confusion_matrix_demo.py` demonstrate count-level error analysis, normalization, threshold effects, and multiclass confusion interpretation.
 KNN materials added: `LESSON_5_30_GUIDE.py`, `LESSON_5_30_ASSIGNMENT.md`, and `scripts/knn_demo.py` demonstrate KNN classification/regression, K selection with CV, and baseline comparisons.
+Bias-variance materials added: `LESSON_5_31_GUIDE.py`, `LESSON_5_31_ASSIGNMENT.md`, and `scripts/bias_variance_demo.py` demonstrate underfitting/overfitting diagnosis, learning-curve interpretation, and intervention planning.
 
 ## Project Structure
 
@@ -109,6 +111,7 @@ ML-python/
 │   ├── f1_evaluation.py               # F1-focused classification evaluation helpers
 │   ├── confusion_matrix_evaluation.py # Confusion-matrix-focused classification evaluation helpers
 │   ├── knn_modeling.py                # KNN classification/regression training and evaluation helpers
+│   ├── bias_variance.py               # Bias-variance diagnostics and learning-curve interpretation
 │   ├── train.py                       # Model training
 │   ├── evaluate.py                    # Model evaluation
 │   ├── predict.py                     # Inference on new data
@@ -128,6 +131,7 @@ ML-python/
 │   └── test_f1_evaluation.py          # F1 evaluation utility tests
 │   ├── test_confusion_matrix_evaluation.py # Confusion-matrix evaluation utility tests
 │   └── test_knn_modeling.py           # KNN modeling utility tests
+│   └── test_bias_variance.py          # Bias-variance utility tests
 ├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
@@ -168,6 +172,8 @@ ML-python/
 ├── LESSON_5_29_ASSIGNMENT.md          # Confusion matrix assignment with threshold and multiclass analysis
 ├── LESSON_5_30_GUIDE.py               # KNN modeling guide for classification and regression
 ├── LESSON_5_30_ASSIGNMENT.md          # KNN assignment with CV-based K tuning and baseline checks
+├── LESSON_5_31_GUIDE.py               # Bias-variance trade-off and model-behavior diagnosis guide
+├── LESSON_5_31_ASSIGNMENT.md          # Bias-variance assignment with learning-curve interpretation
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
