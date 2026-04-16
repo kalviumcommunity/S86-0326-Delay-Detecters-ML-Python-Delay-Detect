@@ -2,7 +2,7 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Twenty-Two Complete Lessons:**
+**Twenty-Three Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (67 unit tests, all passing)
@@ -26,6 +26,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.31**: Understanding Bias and Variance Through Model Behavior (underfitting vs overfitting diagnostics, learning curves, and targeted fixes)
 - **Lesson 5.32**: Training a Decision Tree Model (recursive partitioning, impurity reduction, tree interpretation, and overfitting control)
 - **Lesson 5.33**: Interpreting Feature Importance from Tree-Based Models (MDI vs permutation importance, correlation checks, and safe feature pruning)
+- **Lesson 5.34**: Improving Model Performance Using GridSearchCV (leakage-safe hyperparameter tuning, metric-aware optimization, and randomized search trade-offs)
 
 ---
 
@@ -83,6 +84,7 @@ KNN materials added: `LESSON_5_30_GUIDE.py`, `LESSON_5_30_ASSIGNMENT.md`, and `s
 Bias-variance materials added: `LESSON_5_31_GUIDE.py`, `LESSON_5_31_ASSIGNMENT.md`, and `scripts/bias_variance_demo.py` demonstrate underfitting/overfitting diagnosis, learning-curve interpretation, and intervention planning.
 Decision tree materials added: `LESSON_5_32_GUIDE.py`, `LESSON_5_32_ASSIGNMENT.md`, `src/decision_tree_modeling.py`, `scripts/decision_tree_demo.py`, and `tests/test_decision_tree_modeling.py` demonstrate recursive partitioning, baseline comparison, depth tuning, and tree interpretation.
 Feature-importance materials added: `LESSON_5_33_GUIDE.py`, `LESSON_5_33_ASSIGNMENT.md`, `src/feature_importance_analysis.py`, `scripts/feature_importance_demo.py`, and `tests/test_feature_importance_analysis.py` demonstrate MDI interpretation, permutation validation, and correlation-aware feature review.
+Hyperparameter-tuning materials added: `LESSON_5_34_GUIDE.py`, `LESSON_5_34_ASSIGNMENT.md`, `src/hyperparameter_tuning.py`, `scripts/gridsearch_tuning_demo.py`, and `tests/test_hyperparameter_tuning.py` demonstrate leakage-safe GridSearchCV workflows, metric-aware tuning, and randomized-search comparison.
 
 ## Project Structure
 
@@ -118,6 +120,7 @@ ML-python/
 │   ├── bias_variance.py               # Bias-variance diagnostics and learning-curve interpretation
 │   ├── decision_tree_modeling.py      # Decision tree classification/regression training and evaluation helpers
 │   ├── feature_importance_analysis.py # Tree-based feature-importance analysis helpers
+│   ├── hyperparameter_tuning.py       # GridSearchCV and RandomizedSearchCV tuning helpers
 │   ├── train.py                       # Model training
 │   ├── evaluate.py                    # Model evaluation
 │   ├── predict.py                     # Inference on new data
@@ -140,6 +143,7 @@ ML-python/
 │   └── test_bias_variance.py          # Bias-variance utility tests
 │   └── test_decision_tree_modeling.py  # Decision tree modeling utility tests
 │   └── test_feature_importance_analysis.py # Feature-importance analysis utility tests
+│   └── test_hyperparameter_tuning.py  # Hyperparameter tuning utility tests
 ├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
@@ -182,6 +186,12 @@ ML-python/
 ├── LESSON_5_30_ASSIGNMENT.md          # KNN assignment with CV-based K tuning and baseline checks
 ├── LESSON_5_31_GUIDE.py               # Bias-variance trade-off and model-behavior diagnosis guide
 ├── LESSON_5_31_ASSIGNMENT.md          # Bias-variance assignment with learning-curve interpretation
+├── LESSON_5_32_GUIDE.py               # Decision tree modeling guide and interpretation workflow
+├── LESSON_5_32_ASSIGNMENT.md          # Decision tree assignment with depth tuning and baseline checks
+├── LESSON_5_33_GUIDE.py               # Tree feature-importance interpretation guide (MDI vs permutation)
+├── LESSON_5_33_ASSIGNMENT.md          # Feature-importance assignment with correlation-aware validation
+├── LESSON_5_34_GUIDE.py               # GridSearchCV and RandomizedSearchCV tuning guide
+├── LESSON_5_34_ASSIGNMENT.md          # Hyperparameter-tuning assignment with leakage-safe workflow
 ├── requirements.txt                   # Python dependencies (pinned versions)
 └── README.md
 ```
@@ -255,10 +265,10 @@ Confirm everything is set up correctly:
 (venv) python -m pytest tests/ -v
 ```
 
-All 23 tests should pass:
+All tests should pass (currently 107 unittest checks):
 
 ```
-======================== 23 passed in 6.79s =========================
+======================== 107 passed in ~12s =========================
 ```
 
 ### 5. Run the Complete Pipeline
