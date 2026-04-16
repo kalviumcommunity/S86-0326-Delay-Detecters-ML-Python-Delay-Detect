@@ -2,7 +2,7 @@
 
 A complete, professional ML system for delivery delay prediction that demonstrates **modern Python engineering practices**: modular architecture, environment management, comprehensive testing, and reproducibility.
 
-**Twenty-One Complete Lessons:**
+**Twenty-Two Complete Lessons:**
 
 - **Lesson 5.7**: Python Functions & Imports for ML Workflows (8 modules, 1650+ lines)
 - **Lesson 5.8**: Structuring Modules for Model Code (67 unit tests, all passing)
@@ -25,6 +25,7 @@ A complete, professional ML system for delivery delay prediction that demonstrat
 - **Lesson 5.30**: Training a K-Nearest Neighbours (KNN) Model (distance-based learning, K tuning, scaling discipline)
 - **Lesson 5.31**: Understanding Bias and Variance Through Model Behavior (underfitting vs overfitting diagnostics, learning curves, and targeted fixes)
 - **Lesson 5.32**: Training a Decision Tree Model (recursive partitioning, impurity reduction, tree interpretation, and overfitting control)
+- **Lesson 5.33**: Interpreting Feature Importance from Tree-Based Models (MDI vs permutation importance, correlation checks, and safe feature pruning)
 
 ---
 
@@ -81,6 +82,7 @@ Confusion matrix materials added: `LESSON_5_29_GUIDE.py`, `LESSON_5_29_ASSIGNMEN
 KNN materials added: `LESSON_5_30_GUIDE.py`, `LESSON_5_30_ASSIGNMENT.md`, and `scripts/knn_demo.py` demonstrate KNN classification/regression, K selection with CV, and baseline comparisons.
 Bias-variance materials added: `LESSON_5_31_GUIDE.py`, `LESSON_5_31_ASSIGNMENT.md`, and `scripts/bias_variance_demo.py` demonstrate underfitting/overfitting diagnosis, learning-curve interpretation, and intervention planning.
 Decision tree materials added: `LESSON_5_32_GUIDE.py`, `LESSON_5_32_ASSIGNMENT.md`, `src/decision_tree_modeling.py`, `scripts/decision_tree_demo.py`, and `tests/test_decision_tree_modeling.py` demonstrate recursive partitioning, baseline comparison, depth tuning, and tree interpretation.
+Feature-importance materials added: `LESSON_5_33_GUIDE.py`, `LESSON_5_33_ASSIGNMENT.md`, `src/feature_importance_analysis.py`, `scripts/feature_importance_demo.py`, and `tests/test_feature_importance_analysis.py` demonstrate MDI interpretation, permutation validation, and correlation-aware feature review.
 
 ## Project Structure
 
@@ -115,6 +117,7 @@ ML-python/
 │   ├── knn_modeling.py                # KNN classification/regression training and evaluation helpers
 │   ├── bias_variance.py               # Bias-variance diagnostics and learning-curve interpretation
 │   ├── decision_tree_modeling.py      # Decision tree classification/regression training and evaluation helpers
+│   ├── feature_importance_analysis.py # Tree-based feature-importance analysis helpers
 │   ├── train.py                       # Model training
 │   ├── evaluate.py                    # Model evaluation
 │   ├── predict.py                     # Inference on new data
@@ -136,6 +139,7 @@ ML-python/
 │   └── test_knn_modeling.py           # KNN modeling utility tests
 │   └── test_bias_variance.py          # Bias-variance utility tests
 │   └── test_decision_tree_modeling.py  # Decision tree modeling utility tests
+│   └── test_feature_importance_analysis.py # Feature-importance analysis utility tests
 ├── venv/                              # Virtual environment (Lesson 5.9) - NOT committed
 ├── main.py                            # Orchestration script
 ├── create_sample_data.py              # Generate test data
